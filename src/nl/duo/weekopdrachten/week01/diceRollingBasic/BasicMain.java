@@ -1,6 +1,6 @@
 package nl.duo.weekopdrachten.week01.diceRollingBasic;
 
-public class Main {
+public class BasicMain {
 
     public static void main(String[] args) {
 
