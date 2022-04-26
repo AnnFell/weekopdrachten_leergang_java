@@ -1,4 +1,4 @@
-package nl.duo.weekopdrachten.week01.miniweekopdrachten;
+package nl.duo.weekopdrachten.week01.miniweekopdrachten.opdr1tm5;
 
 import java.util.Arrays;
 
@@ -6,6 +6,7 @@ import static nl.duo.weekopdrachten.week01.miniweekopdrachten.Utility.*;
 
 public class MiniMain {
     public static void main(String[] args) {
+        // Opdracht 1: Strings aan elkaar plakken
         printAssignmentHeader(1);
         String word1 = "Hello";
         String word2 = "how";
@@ -15,11 +16,13 @@ public class MiniMain {
         System.out.println(sentence);
         printBorder();
 
+        // Opdracht 2: Hoeveel E's?
         printAssignmentHeader(2);
         int result2 = getAmountOfACharInWord('e', "regenen");
         System.out.println("Amount of e in regenen: " + result2);
         printBorder();
 
+        // Opdracht 3: Tel het array op
         printAssignmentHeader(3);
         int[] numbers = {1, 2, 3, 4};
         int result3 = 0;
@@ -30,6 +33,7 @@ public class MiniMain {
         System.out.println("The addition of all the numbers is: " + result3);
         printBorder();
 
+        // Opdracht 4: Array Sorteren
         printAssignmentHeader(4);
         int[] unsortedArray = {4, 6, 2, 8, 9, 0, 1, 3, 5, 7};
         System.out.println("At the start: " + Arrays.toString(unsortedArray));
@@ -37,6 +41,7 @@ public class MiniMain {
         System.out.println("Result: " + Arrays.toString(result4));
         printBorder();
 
+        // Opdracht 5: Repareer de auto
         printAssignmentHeader(5);
         Auto nieuweAuto = new Auto();
         Monteur nieuweMonteur = new Monteur();

@@ -1,4 +1,4 @@
-package nl.duo.weekopdrachten.week01.miniweekopdrachten;
+package nl.duo.weekopdrachten.week01.miniweekopdrachten.opdr1tm5;
 
 public class Monteur {
     private int reparatiekosten;
