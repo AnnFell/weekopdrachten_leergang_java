@@ -2,7 +2,7 @@ package nl.duo.weekopdrachten.week01.miniweekopdrachten.opdr1tm5;
 
 import java.util.Arrays;
 
-import static nl.duo.weekopdrachten.week01.miniweekopdrachten.Utility.*;
+import static nl.duo.weekopdrachten.week01.miniweekopdrachten.opdr1tm5.Utility.*;
 
 public class MiniMain {
     public static void main(String[] args) {
