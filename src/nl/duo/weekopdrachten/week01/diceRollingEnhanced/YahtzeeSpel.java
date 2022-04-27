@@ -12,6 +12,7 @@ public class YahtzeeSpel {
     public YahtzeeSpel() {
         System.out.println("****** Yahtzee! ******");
         System.out.println("Om het spel te stoppen: typ q in en druk op enter.");
+        // TODO: maak speler aan
         System.out.println("Druk op enter om de dobbelstenen te gooien");
         System.out.println("____________________________________");
         for (int i = 0; i < 5; i++) {
@@ -46,12 +47,15 @@ public class YahtzeeSpel {
         int[] filter = vasthouden();
 
         // opnieuw werpen met filter
+        // TODO: wat als alle dobbelstenen worden geblokkeerd?
         for (int i = 0; i < dobbelstenen.size(); i++) {
             if (filter[i] == 0) {
                 dobbelstenen.get(i).werpen();
             }
         }
         printWorp(worpTeller);
+
+        //TODO: sla resultaat op in Worp object & verplaats print methode
     }
 
     private void printWorp(int worpTeller) {
