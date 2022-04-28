@@ -1,53 +1,50 @@
 package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class YahtzeeSpel {
     private ArrayList<Dobbelsteen> dobbelstenen = new ArrayList<>();
+    private Scanner spelScanner;
     private Speler speler1;
-//    private Speler speler2;
 
 
     public YahtzeeSpel() {
-        // TODO: vraag: scanner.close geeft foutmelding?
-        // Maar dobbelstenen aan
+        // Maak dobbelstenen aan
         for (int i = 0; i < 5; i++) {
             Dobbelsteen steen = new Dobbelsteen();
             dobbelstenen.add(steen);
         }
-
-        System.out.println("****** Yahtzee! ******");
-        System.out.println("Om het spel te stoppen: typ q in en druk op enter.");
+        // Start input scanner
+        spelScanner = new Scanner(System.in);
 
         // Maak spelers aan
-        Scanner spelerScanner = new Scanner(System.in);
+        System.out.println("****** Yahtzee! ******");
         System.out.println("Wat is de naam van de eerste speler? Typ deze in en druk op enter.");
-        String naamSpeler1 = spelerScanner.nextLine();
+        String naamSpeler1 = spelScanner.nextLine();
         speler1 = new Speler(naamSpeler1);
         System.out.println("Bedankt. Speler 1 heet: " + naamSpeler1);
-//        System.out.println("Wat is de naam van de tweede speler? Typ deze in en druk op enter.");
-//        String naamSpeler2 = spelerScanner.nextLine();
-//        System.out.println("Bedankt. Speler 2 heet: " + naamSpeler1);
-//        speler2 = new Speler(naamSpeler2);
-
-        System.out.println("Druk op enter om het spel te starten");
-        System.out.println("____________________________________");
     }
 
-    public void spelen() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // Refactor scanner en reader tot 1
+    public void spelen() {
+        System.out.println("Druk op enter om het spel te starten");
+        String key = spelScanner.nextLine();
+
         boolean qPress = false;
-        while (!qPress) {
-            String isKeyPressed = reader.readLine();
-            if (isKeyPressed.equals("q")) {
-                System.out.println("Het spel sluit af! Bedankt voor het spelen.");
-                qPress = true;
-            } else if (isKeyPressed.equals("")) {
-                worp();
+
+        if (key.equals("")) {
+            System.out.println("____________________________________");
+            System.out.println("Het spel is gestart. Om het spel te stoppen: typ q in en druk op enter.");
+            System.out.println("");
+            while (!qPress) {
+                String isKeyPressed = spelScanner.nextLine();
+                if (isKeyPressed.equalsIgnoreCase("q")) {
+                    System.out.println("Het spel sluit af! Bedankt voor het spelen.");
+                    qPress = true;
+                } else if (isKeyPressed.equals("")) {
+                    // TODO: welke speler start?
+                    worp();
+                }
             }
         }
     }
@@ -77,9 +74,8 @@ public class YahtzeeSpel {
 
     private int[] vasthouden() {
         int[] blokkeerArray = new int[5];
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Welke posities wilt u vasthouden? 0 voor geen, anders bv 124.");
-        String input = scanner.nextLine();
+        String input = spelScanner.nextLine();
         System.out.println("Invoer: " + input);
 
         if (!input.equals("0")) {
