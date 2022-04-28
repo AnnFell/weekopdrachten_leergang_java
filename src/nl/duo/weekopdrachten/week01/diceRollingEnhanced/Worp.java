@@ -1,12 +1,12 @@
 package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
 
-import java.util.Arrays;
-
 public class Worp {
     private int[] uitslag = new int[5];
+    private String naamSpeler;
 
-    public Worp() {
-        System.out.println("*** Start nieuwe beurt: ***");
+    public Worp(String naamSpeler) {
+        this.naamSpeler = naamSpeler;
+        System.out.println("*** Beurt van " + naamSpeler + ": ***");
     }
 
     public void setUitslagPerDobbelsteen(int index, int waarde) {

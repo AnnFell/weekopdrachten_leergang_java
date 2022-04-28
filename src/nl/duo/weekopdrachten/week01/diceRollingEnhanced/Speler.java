@@ -13,4 +13,8 @@ public class Speler {
     public void voegWorpToe(Worp worp) {
         worpGeschiedenis.add(worp);
     }
+
+    public String getNaam(){
+        return naam;
+    }
 }
