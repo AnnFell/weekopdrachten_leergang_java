@@ -8,11 +8,15 @@ import java.util.Scanner;
 
 public class YahtzeeSpel {
     private ArrayList<Dobbelsteen> dobbelstenen = new ArrayList<>();
+    private ArrayList<Speler> spelers = new ArrayList<>();
+
 
     public YahtzeeSpel() {
         System.out.println("****** Yahtzee! ******");
         System.out.println("Om het spel te stoppen: typ q in en druk op enter.");
         // TODO: maak speler aan
+        Scanner spelerScanner = new Scanner(System.in);
+
         System.out.println("Druk op enter om de dobbelstenen te gooien");
         System.out.println("____________________________________");
         for (int i = 0; i < 5; i++) {
@@ -23,7 +27,6 @@ public class YahtzeeSpel {
 
     public void spelen() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
         boolean qPress = false;
         while (!qPress) {
             String isKeyPressed = reader.readLine();
@@ -37,26 +40,29 @@ public class YahtzeeSpel {
     }
 
     private void worp() {
-        int worpTeller = 1;
-        for (Dobbelsteen steen : dobbelstenen) {
-            steen.werpen();
-        }
-        printWorp(worpTeller);
-        worpTeller++;
+        int[] filter = new int[5];
+        Worp worp = new Worp();
 
-        int[] filter = vasthouden();
+        for (int i = 1; i <= 3; i++) {
+            // TODO: stop als filter alles blokkeert
+            for (int j = 0; j < dobbelstenen.size(); j++) {
+                if (filter[j] == 0) {
+                    dobbelstenen.get(j).werpen();
 
-        // opnieuw werpen met filter
-        // TODO: wat als alle dobbelstenen worden geblokkeerd?
-        for (int i = 0; i < dobbelstenen.size(); i++) {
-            if (filter[i] == 0) {
-                dobbelstenen.get(i).werpen();
+                    // TODO: vraag, is dit beter dan Worp zelf kennis te geven van dobbelstenen?
+                    worp.setUitslagPerDobbelsteen(j, dobbelstenen.get(j).getWaarde());
+                }
+            }
+            printWorp(i);
+
+            if (i != 3) {
+                filter = vasthouden();
             }
         }
-        printWorp(worpTeller);
-
-        //TODO: sla resultaat op in Worp object & verplaats print methode
+        // TODO: verplaats print methode naar worp
+        // TODO: einde beurt afhandelen
     }
+
 
     private void printWorp(int worpTeller) {
         System.out.print("WORP" + worpTeller + ": ");
@@ -70,7 +76,6 @@ public class YahtzeeSpel {
         int[] blokkeerArray = new int[5];
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welke posities wilt u vasthouden? 0 voor geen, anders bv 124.");
-
         String input = scanner.nextLine();
         System.out.println("Invoer: " + input);
 
