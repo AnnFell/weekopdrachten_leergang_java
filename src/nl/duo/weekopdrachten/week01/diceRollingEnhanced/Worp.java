@@ -6,13 +6,18 @@ public class Worp {
     private int[] uitslag = new int[5];
 
     public Worp() {
-        System.out.println("Nieuwe worp gemaakt. Is nu: " + Arrays.toString(uitslag));
+        System.out.println("*** Start nieuwe beurt: ***");
     }
 
     public void setUitslagPerDobbelsteen(int index, int waarde) {
         uitslag[index] = waarde;
     }
 
-    public void geefUitslag() {
+    public void geefUitslag(int worpTeller) {
+        System.out.print("WORP " + worpTeller + ": ");
+        for (int score : uitslag) {
+            System.out.print(score + " ");
+        }
+        System.out.println();
     }
 }
