@@ -13,11 +13,23 @@ public class Worp {
         uitslag[index] = waarde;
     }
 
-    public void geefUitslag(int worpTeller) {
+    public void printUitslag(int worpTeller) {
         System.out.print("WORP " + worpTeller + ": ");
         for (int score : uitslag) {
             System.out.print(score + " ");
         }
         System.out.println();
+    }
+
+    public int[] getUitslag() {
+        return uitslag;
+    }
+
+    public int totaalOgen() {
+        int totaal = 0;
+        for (int steen : uitslag) {
+            totaal += steen;
+        }
+        return totaal;
     }
 }

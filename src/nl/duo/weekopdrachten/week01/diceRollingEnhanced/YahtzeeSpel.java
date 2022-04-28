@@ -8,7 +8,8 @@ public class YahtzeeSpel {
     private ArrayList<Dobbelsteen> dobbelstenen = new ArrayList<>();
     private Scanner spelScanner;
     private ArrayList<Speler> spelers = new ArrayList<>();
-    private int beurtTeller;
+    private int welkeSpelerIsAanDeBeurt;
+    private int aantalRondes;
 
     public YahtzeeSpel() {
         // Maak dobbelstenen aan
@@ -26,7 +27,6 @@ public class YahtzeeSpel {
         System.out.println("Druk op enter om het spel te starten");
         String key = spelScanner.nextLine();
 
-
         if (key.equals("")) {
             System.out.println("Het spel is gestart! " + geefSpelerDieAanDeBeurtIs().getNaam() + " kan op enter drukken voor de eerste worp.");
 
@@ -38,8 +38,8 @@ public class YahtzeeSpel {
                     System.out.println("Het spel sluit af! Bedankt voor het spelen.");
                     qPress = true;
                 } else if (isKeyPressed.equals("")) {
-                    worp(geefSpelerDieAanDeBeurtIs());
-                    setBeurtTeller();
+                    beurt(geefSpelerDieAanDeBeurtIs());
+                    beurtBijhouden();
                     System.out.println("\nDe beurt is aan " + geefSpelerDieAanDeBeurtIs().getNaam()
                             + ". Druk op enter om de dobbelstenen te gooien of typ q + enter om het spel te sluiten.");
                 }
@@ -47,7 +47,7 @@ public class YahtzeeSpel {
         }
     }
 
-    private void worp(Speler speler) {
+    private void beurt(Speler speler) {
         int[] blokkeerArray = new int[5];
         Worp worp = new Worp(speler.getNaam());
 
@@ -61,17 +61,44 @@ public class YahtzeeSpel {
                     worp.setUitslagPerDobbelsteen(j, uitslag);
                 }
             }
-            worp.geefUitslag(i);
+            worp.printUitslag(i);
             if (i != 3) {
                 blokkeerArray = vasthouden();
             }
         }
 
-        // Worp toekennen aan speler
-        speler.voegWorpToe(worp);
-        // TODO: yahtzee check?
+        // speler vult kaart in
+        kaartInvullen(speler, worp);
 
-        System.out.println("Dit is het einde van je beurt, " + speler.getNaam() + ". Je worp wordt bewaard.");
+        System.out.println("Dit is het einde van je beurt, " + speler.getNaam() + ".");
+    }
+
+    private void kaartInvullen(Speler speler, Worp worp) {
+        ArrayList<KaartItem> keuzes = speler.getYahtzeeKaart().optiesVoorInvullen(worp.getUitslag());
+
+        // Weergeven keuzes
+        StringBuilder optiesString = new StringBuilder();
+        if (keuzes.size() > 0) {
+            optiesString.append("De volgende opties kun je kiezen om in te vullen bij deze worp:");
+            for (KaartItem keuze : keuzes) {
+                optiesString.append(keuzes.indexOf(keuze) + ": " + keuze.getNaam() + " ");
+            }
+            optiesString.append("\nMaak uw keuze: typ een nummer of kies voor PAS.");
+            System.out.println(optiesString);
+
+            // keuze invoeren
+            String inputKeuze = spelScanner.nextLine();
+            if (inputKeuze.equalsIgnoreCase("PAS")) {
+                System.out.println("Ok, u vult deze beurt niets in.");
+            } else {
+                int index = Integer.parseInt(inputKeuze);
+                keuzes.get(index).invullen(worp.getUitslag());
+                System.out.println("Ok, uw keuze voor " + keuzes.get(index).getNaam() + " is ingevuld.");
+            }
+        } else {
+            // geen keuzes mogelijk
+            System.out.println("U heeft geen open opties meer om in te vullen bij deze worp. U moet passeren.");
+        }
     }
 
     private int[] vasthouden() {
@@ -95,18 +122,6 @@ public class YahtzeeSpel {
         return blokkeerArray;
     }
 
-    private Speler geefSpelerDieAanDeBeurtIs() {
-        return spelers.get(beurtTeller);
-    }
-
-    private void setBeurtTeller() {
-        if (beurtTeller < spelers.size() - 1) {
-            beurtTeller++;
-        } else {
-            beurtTeller = 0;
-        }
-    }
-
     private boolean vasthoudenInputIsValide(String input) {
         switch (input) {
             case "":
@@ -123,6 +138,21 @@ public class YahtzeeSpel {
                 }
         }
         return true;
+    }
+
+    private Speler geefSpelerDieAanDeBeurtIs() {
+        return spelers.get(welkeSpelerIsAanDeBeurt);
+    }
+
+    private void beurtBijhouden() {
+        if (welkeSpelerIsAanDeBeurt < spelers.size() - 1) {
+            welkeSpelerIsAanDeBeurt++;
+        } else if (aantalRondes < 12) {
+            welkeSpelerIsAanDeBeurt = 0;
+            aantalRondes++;
+        } else {
+            // TODO trigger de uitslag
+        }
     }
 
     private void maakSpelers() {

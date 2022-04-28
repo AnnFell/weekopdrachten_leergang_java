@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Speler {
     String naam;
-    ArrayList<Worp> worpGeschiedenis = new ArrayList<>();
+    YahtzeeKaart yahtzeeKaart = new YahtzeeKaart();
 
     public Speler(String naam) {
         this.naam = naam;
     }
 
-    public void voegWorpToe(Worp worp) {
-        worpGeschiedenis.add(worp);
+    public String getNaam() {
+        return naam;
     }
 
-    public String getNaam(){
-        return naam;
+    public YahtzeeKaart getYahtzeeKaart() {
+        return yahtzeeKaart;
     }
 }
