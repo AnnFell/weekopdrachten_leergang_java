@@ -14,7 +14,11 @@ public class Speler {
         return naam;
     }
 
-    public YahtzeeKaart getYahtzeeKaart() {
-        return yahtzeeKaart;
+    public ArrayList<String> beschikbareOptiesVanSpeler(int[] worp) {
+        return yahtzeeKaart.optiesVoorInvullen(worp);
+    }
+
+    public void vulKeuzeIn(String naamOptie, int[] worp) {
+        yahtzeeKaart.vulKeuzeIn(naamOptie, worp);
     }
 }

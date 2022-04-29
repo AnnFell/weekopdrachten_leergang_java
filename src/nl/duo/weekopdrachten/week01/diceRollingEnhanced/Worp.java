@@ -24,12 +24,4 @@ public class Worp {
     public int[] getUitslag() {
         return uitslag;
     }
-
-    public int totaalOgen() {
-        int totaal = 0;
-        for (int steen : uitslag) {
-            totaal += steen;
-        }
-        return totaal;
-    }
 }

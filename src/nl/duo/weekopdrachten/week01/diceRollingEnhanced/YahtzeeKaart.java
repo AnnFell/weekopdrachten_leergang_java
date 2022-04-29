@@ -26,22 +26,35 @@ public class YahtzeeKaart {
 
 
     // bekijk worp (welke kan? & is nog niet ingevuld?), geef een lijstje terug met opties
-    public ArrayList<KaartItem> optiesVoorInvullen(int[] worp) {
-        // Sorteer worp en converteer naar string
-        int[] testWorp = Arrays.copyOf(worp, worp.length);
-        Arrays.sort(testWorp);
-        StringBuilder test = new StringBuilder();
-        for (int x : testWorp) {
-            test.append(x);
-        }
+    public ArrayList<String> optiesVoorInvullen(int[] worp) {
+        String test = worpArrayNaarString(worp);
 
-        ArrayList<KaartItem> mogelijkheden = new ArrayList<>();
+        ArrayList<String> mogelijkheden = new ArrayList<>();
         for (KaartItem item : vakjes) {
             if (Pattern.matches(item.getRegex(), test) && !item.isIngevuld()) {
-                mogelijkheden.add(item);
+                mogelijkheden.add(item.getNaam());
+
             }
         }
         return mogelijkheden;
+    }
+
+    public void vulKeuzeIn(String naamKeuze, int[] worp){
+        for(KaartItem item : vakjes){
+            if(item.getNaam().equals(naamKeuze)){
+                item.invullen(worp);
+            }
+        }
+    }
+
+    private String worpArrayNaarString(int[] worp) {
+        int[] inputWorp = Arrays.copyOf(worp, worp.length);
+        Arrays.sort(inputWorp);
+        StringBuilder builder = new StringBuilder();
+        for (int x : inputWorp) {
+            builder.append(x);
+        }
+        return builder.toString();
     }
 
     public void berekenEindscore() {
