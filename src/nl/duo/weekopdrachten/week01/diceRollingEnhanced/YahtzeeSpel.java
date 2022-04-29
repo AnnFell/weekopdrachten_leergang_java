@@ -7,7 +7,7 @@ public class YahtzeeSpel {
     private ArrayList<Dobbelsteen> dobbelstenen = new ArrayList<>();
     private View view;
     private ArrayList<Speler> spelers = new ArrayList<>();
-    private final static int MAX_AANTAL_RONDES = 13;
+    private final static int MAX_AANTAL_RONDES = 9; // TODO: ophogen wanneer regex compleet is
     private int spelerDieAanDeBeurtIs = 0;
     private int aantalRondes = 0;
 

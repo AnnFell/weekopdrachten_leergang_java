@@ -9,30 +9,30 @@ public class YahtzeeKaart {
     ArrayList<KaartItem> vakjes = new ArrayList<>();
 
     public YahtzeeKaart() {
-        // TODO check regex deel 1
-        vakjes.add(new KaartItem("Eenen", "(?=1)", 1));
-        vakjes.add(new KaartItem("Tweeen", "(?=2)", 2));
-        vakjes.add(new KaartItem("Drieen", "(?=3)", 3));
-        vakjes.add(new KaartItem("Vieren", "(?=4)", 4));
-        vakjes.add(new KaartItem("Vijfen", "(?=5)", 5));
-        vakjes.add(new KaartItem("Zessen", "(?=6)", 6));
-        vakjes.add(new KaartItem("Three of a kind", "([1-5])\1{2,}"));
-        vakjes.add(new KaartItem("Carre", "([1-5])\1{3,}"));
-        vakjes.add(new KaartItem("Kleine straat", "1234|2345|3456", 30));
+        // TODO: maak regex compleet
+        vakjes.add(new KaartItem("Eenen", ".*1.*", 1));
+        vakjes.add(new KaartItem("Tweeen", ".*2.*", 2));
+        vakjes.add(new KaartItem("Drieen", ".*3.*", 3));
+        vakjes.add(new KaartItem("Vieren", ".*4.*", 4));
+        vakjes.add(new KaartItem("Vijfen", ".*5.*", 5));
+        vakjes.add(new KaartItem("Zessen", ".*6.*", 6));
+//        vakjes.add(new KaartItem("Three of a kind", "([1-6])\1{2,}"));
+//        vakjes.add(new KaartItem("Carre", "([1-6])\1{3,}"));
+//        vakjes.add(new KaartItem("Kleine straat", "1234|2345|3456", 30));
         vakjes.add(new KaartItem("Grote straat", "12345|23456", 40));
-        vakjes.add(new KaartItem("Full House", "(.)\1{2}(.)\2|(.)\3(.)\4{2}"));
+//        vakjes.add(new KaartItem("Full House", "(.)\1{2}(.)\2|(.)\3(.)\4{2}"));
         vakjes.add(new KaartItem("Chance", ".*"));
-        vakjes.add(new KaartItem("Yahtzee!", "([1-5])\1{4,}", 50));
+        vakjes.add(new KaartItem("Yahtzee!", "1{4,}|2{4,}|3{4,}|4{4,}|5{4,}|6{4,}", 50));
     }
 
     public ArrayList<String> optiesVoorInvullen(int[] worp) {
         String test = worpArrayNaarString(worp);
+        System.out.println(test);
 
         ArrayList<String> mogelijkheden = new ArrayList<>();
         for (KaartItem item : vakjes) {
             if (Pattern.matches(item.getRegex(), test) && !item.isIngevuld()) {
                 mogelijkheden.add(item.getNaam());
-
             }
         }
         return mogelijkheden;
