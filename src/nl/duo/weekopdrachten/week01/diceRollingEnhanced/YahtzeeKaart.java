@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class YahtzeeKaart {
+    private static final int DEEL_1_BONUS = 35;
     ArrayList<KaartItem> vakjes = new ArrayList<>();
 
     public YahtzeeKaart() {
@@ -24,8 +25,6 @@ public class YahtzeeKaart {
         vakjes.add(new KaartItem("Yahtzee!", "([1-5])\1{4,}", 50));
     }
 
-
-    // bekijk worp (welke kan? & is nog niet ingevuld?), geef een lijstje terug met opties
     public ArrayList<String> optiesVoorInvullen(int[] worp) {
         String test = worpArrayNaarString(worp);
 
@@ -39,9 +38,9 @@ public class YahtzeeKaart {
         return mogelijkheden;
     }
 
-    public void vulKeuzeIn(String naamKeuze, int[] worp){
-        for(KaartItem item : vakjes){
-            if(item.getNaam().equals(naamKeuze)){
+    public void vulKeuzeIn(String naamKeuze, int[] worp) {
+        for (KaartItem item : vakjes) {
+            if (item.getNaam().equals(naamKeuze)) {
                 item.invullen(worp);
             }
         }
@@ -57,9 +56,24 @@ public class YahtzeeKaart {
         return builder.toString();
     }
 
-    public void berekenEindscore() {
-        // TODO afmaken score
-        // vakjesboven bonus (waarde boven 63)
-        // Waarde benedenvakjes
+    public int[] berekenEindscore() {
+        int[] score = new int[3];
+        int deel1 = 0;
+        int deel2 = 0;
+        for (KaartItem vakje : vakjes) {
+            if (vakje.getTeBehalenPunten() > 0 && vakje.getTeBehalenPunten() <= 6) {
+                deel1 += vakje.getWaarde();
+            } else {
+                deel2 += vakje.getWaarde();
+            }
+        }
+        // Deel 1 bonus (waarde behaald boven 63)
+        if (deel1 > 63) {
+            deel1 += DEEL_1_BONUS;
+        }
+        score[0] = deel1;
+        score[1] = deel2;
+        score[2] = deel1 + deel2;
+        return score;
     }
 }

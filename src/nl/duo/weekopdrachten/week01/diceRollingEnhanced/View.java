@@ -10,7 +10,7 @@ public class View {
     public View() {
         // Start input scanner
         spelScanner = new Scanner(System.in);
-        System.out.println("*** *** *** Yahtzee! *** *** ***");
+        System.out.println("*** *** *** * Yahtzee! * *** *** ***");
     }
 
     public ArrayList<String> namenSpelersVerzamelen() {
@@ -19,7 +19,6 @@ public class View {
         ArrayList<String> spelers = new ArrayList<>();
 
         String aantalSpelers = spelScanner.nextLine();
-
         while (!Pattern.matches("[0-9]+", aantalSpelers)) {
             System.err.println("Voer aub. een getal in.");
             aantalSpelers = spelScanner.nextLine();
@@ -66,11 +65,11 @@ public class View {
                 + ". Druk op enter om de dobbelstenen te gooien of typ q + enter om het spel te sluiten.");
     }
 
-    public String invullenKaart(ArrayList<String> keuzes){
+    public String invullenKaart(ArrayList<String> keuzes) {
         // Weergeven keuzes
         StringBuilder optiesString = new StringBuilder();
         if (keuzes.size() > 0) {
-            optiesString.append("De volgende opties kun je kiezen om in te vullen bij deze worp:");
+            optiesString.append("De volgende opties kun je kiezen om in te vullen bij deze worp:\n");
             for (String keuze : keuzes) {
                 optiesString.append(keuzes.indexOf(keuze) + ": " + keuze + " ");
             }
@@ -83,6 +82,11 @@ public class View {
                 System.out.println("Ok, u vult deze beurt niets in.");
                 return "";
             } else {
+                String pattern = "[0-" + keuzes.size() + "]+";
+                while (!Pattern.matches(pattern, inputKeuze)) {
+                    System.err.println("Voer aub. het getal in dat bij uw keuze staat");
+                    inputKeuze = spelScanner.nextLine();
+                }
                 int index = Integer.parseInt(inputKeuze);
                 System.out.println("Ok, uw keuze voor " + keuzes.get(index) + " is ingevuld.");
                 return inputKeuze;
@@ -94,7 +98,7 @@ public class View {
         }
     }
 
-    public String vraagWelkeDobbelstenenVasthouden(){
+    public String vraagWelkeDobbelstenenVasthouden() {
         System.out.println("Welke posities wilt u vasthouden? 0 voor geen, anders bv. 124.");
         String input = spelScanner.nextLine();
 
@@ -123,4 +127,16 @@ public class View {
         return true;
     }
 
+    public void printScoreVanSpeler(String naamSpeler, int[] score) {
+        System.out.println(String.format("\n*** Speler %s heeft: ***" +
+                        "\nDeel 1: %3d punten" +
+                        "\nDeel 2: %3d punten" +
+                        "\n       ____________ + " +
+                        "\nTotaal: %3d punten",
+                naamSpeler, score[0], score[1], score[2]));
+    }
+
+    public void printWinnaar(String naamSpeler) {
+        System.out.println(String.format("*** *** *** * Speler %s is de winnaar! * *** *** ***", naamSpeler));
+    }
 }

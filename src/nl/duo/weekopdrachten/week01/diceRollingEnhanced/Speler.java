@@ -21,4 +21,8 @@ public class Speler {
     public void vulKeuzeIn(String naamOptie, int[] worp) {
         yahtzeeKaart.vulKeuzeIn(naamOptie, worp);
     }
+
+    public int[] getEindscore() {
+        return yahtzeeKaart.berekenEindscore();
+    }
 }

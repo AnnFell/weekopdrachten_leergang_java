@@ -48,6 +48,10 @@ public class KaartItem {
         return regex;
     }
 
+    public int getTeBehalenPunten() {
+        return teBehalenPunten;
+    }
+
     public int getWaarde() {
         return waarde;
     }

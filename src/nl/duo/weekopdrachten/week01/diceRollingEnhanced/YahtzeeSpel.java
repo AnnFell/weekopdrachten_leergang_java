@@ -3,12 +3,13 @@ package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
 import java.util.ArrayList;
 
 public class YahtzeeSpel {
+
     private ArrayList<Dobbelsteen> dobbelstenen = new ArrayList<>();
     private View view;
-
     private ArrayList<Speler> spelers = new ArrayList<>();
-    private int spelerDieAanDeBeurtIs;
-    private int aantalRondes;
+    private final static int MAX_AANTAL_RONDES = 13;
+    private int spelerDieAanDeBeurtIs = 0;
+    private int aantalRondes = 0;
 
     public YahtzeeSpel() {
         // Maak dobbelstenen aan
@@ -37,7 +38,6 @@ public class YahtzeeSpel {
                 } else if (isKeyPressed.equals("")) {
                     beurt(getSpelerDieAanDeBeurtIs());
                     beurtBijhouden();
-                    view.geefDeBeurtAan(getSpelerDieAanDeBeurtIs().getNaam());
                 }
             }
         }
@@ -51,13 +51,17 @@ public class YahtzeeSpel {
     }
 
     private void beurtBijhouden() {
-        if (spelerDieAanDeBeurtIs < spelers.size() - 1) {
-            spelerDieAanDeBeurtIs++;
-        } else if (aantalRondes < 12) {
-            spelerDieAanDeBeurtIs = 0;
-            aantalRondes++;
+        if (aantalRondes >= MAX_AANTAL_RONDES - 1) {
+            berekenUitslag();
+            // Stop het spel
+            System.exit(0);
         } else {
-            // TODO trigger de uitslag
+            // alleen speler wijzigen als er meer dan 1 speler is
+            if (spelers.size() > 1 && spelerDieAanDeBeurtIs < spelers.size() - 1) {
+                spelerDieAanDeBeurtIs++;
+            }
+            aantalRondes++;
+            view.geefDeBeurtAan(getSpelerDieAanDeBeurtIs().getNaam());
         }
     }
 
@@ -113,5 +117,20 @@ public class YahtzeeSpel {
 
     private Speler getSpelerDieAanDeBeurtIs() {
         return spelers.get(spelerDieAanDeBeurtIs);
+    }
+
+    private void berekenUitslag() {
+        Speler winnaar = spelers.get(0);
+        int hoogsteScore = 0;
+        for (Speler speler : spelers) {
+            int[] score = speler.getEindscore();
+            if (score[2] > hoogsteScore) {
+                winnaar = speler;
+                hoogsteScore = score[2];
+            }
+            view.printScoreVanSpeler(speler.getNaam(), score);
+        }
+        // Winnaar weergeven
+        view.printWinnaar(winnaar.getNaam());
     }
 }
