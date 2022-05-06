@@ -1,12 +1,12 @@
-package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
+package nl.duo.weekopdrachten.diceRollingEnhanced;
 
 import java.util.ArrayList;
 
 public class YahtzeeSpel {
 
-    private ArrayList<Dobbelsteen> dobbelstenen = new ArrayList<>();
-    private View view;
-    private ArrayList<Speler> spelers = new ArrayList<>();
+    private final ArrayList<Dobbelsteen> dobbelstenen = new ArrayList<>();
+    private final View view;
+    private final ArrayList<Speler> spelers = new ArrayList<>();
     private final static int MAX_AANTAL_RONDES = 9; // TODO: ophogen wanneer regex compleet is
     private int spelerDieAanDeBeurtIs = 0;
     private int aantalRondes = 0;

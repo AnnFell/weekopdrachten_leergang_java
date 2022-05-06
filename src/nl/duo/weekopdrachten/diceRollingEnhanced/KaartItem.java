@@ -1,8 +1,8 @@
-package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
+package nl.duo.weekopdrachten.diceRollingEnhanced;
 
 public class KaartItem {
-    private String naam;
-    private String regex;
+    private final String naam;
+    private final String regex;
     private int teBehalenPunten;
     private int waarde;
 

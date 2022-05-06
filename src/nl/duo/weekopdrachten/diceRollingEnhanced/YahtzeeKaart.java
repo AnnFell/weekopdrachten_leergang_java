@@ -1,4 +1,4 @@
-package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
+package nl.duo.weekopdrachten.diceRollingEnhanced;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,11 +1,10 @@
-package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
+package nl.duo.weekopdrachten.diceRollingEnhanced;
 
 public class Dobbelsteen {
     int waarde;
 
     public int werpen() {
-        waarde = (int) ((Math.random() * 6) + 1);
-        return waarde;
+        return (int) ((Math.random() * 6) + 1);
     }
 
     public int getWaarde() {

@@ -1,4 +1,4 @@
-package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
+package nl.duo.weekopdrachten.diceRollingEnhanced;
 
 public class YahtzeeMain {
     public static void main(String[] args) {

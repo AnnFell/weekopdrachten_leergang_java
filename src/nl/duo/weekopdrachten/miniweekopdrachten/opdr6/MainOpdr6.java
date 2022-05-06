@@ -1,4 +1,4 @@
-package nl.duo.weekopdrachten.week01.miniweekopdrachten.opdr6;
+package nl.duo.weekopdrachten.miniweekopdrachten.opdr6;
 
 import java.util.Arrays;
 import java.util.Scanner;

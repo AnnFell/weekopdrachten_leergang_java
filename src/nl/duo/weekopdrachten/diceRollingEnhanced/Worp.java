@@ -1,11 +1,9 @@
-package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
+package nl.duo.weekopdrachten.diceRollingEnhanced;
 
 public class Worp {
-    private int[] uitslag = new int[5];
-    private String naamSpeler;
+    private final int[] uitslag = new int[5];
 
     public Worp(String naamSpeler) {
-        this.naamSpeler = naamSpeler;
         System.out.println("*** Beurt van " + naamSpeler + ": ***");
     }
 

@@ -1,4 +1,4 @@
-package nl.duo.weekopdrachten.week01.miniweekopdrachten.opdr8;
+package nl.duo.weekopdrachten.miniweekopdrachten.opdr8;
 
 public class Boot {
 

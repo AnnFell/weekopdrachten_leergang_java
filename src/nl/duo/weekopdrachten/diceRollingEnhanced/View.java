@@ -1,11 +1,11 @@
-package nl.duo.weekopdrachten.week01.diceRollingEnhanced;
+package nl.duo.weekopdrachten.diceRollingEnhanced;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class View {
-    private Scanner spelScanner;
+    private final Scanner spelScanner;
 
     public View() {
         // Start input scanner
@@ -52,8 +52,7 @@ public class View {
     }
 
     public String luisterNaarInput() {
-        String input = spelScanner.nextLine();
-        return input;
+        return spelScanner.nextLine();
     }
 
     public void sluitSpelAf() {
@@ -71,7 +70,10 @@ public class View {
         if (keuzes.size() > 0) {
             optiesString.append("De volgende opties kun je kiezen om in te vullen bij deze worp:\n");
             for (String keuze : keuzes) {
-                optiesString.append(keuzes.indexOf(keuze) + ": " + keuze + " ");
+                optiesString.append(keuzes.indexOf(keuze))
+                        .append(": ")
+                        .append(keuze)
+                        .append(" ");
             }
             optiesString.append("\nMaak uw keuze: typ een nummer of kies voor PAS.");
             System.out.println(optiesString);
@@ -128,15 +130,15 @@ public class View {
     }
 
     public void printScoreVanSpeler(String naamSpeler, int[] score) {
-        System.out.println(String.format("\n*** Speler %s heeft: ***" +
+        System.out.printf("\n*** Speler %s heeft: ***" +
                         "\nDeel 1: %3d punten" +
                         "\nDeel 2: %3d punten" +
                         "\n       ____________ + " +
-                        "\nTotaal: %3d punten",
-                naamSpeler, score[0], score[1], score[2]));
+                        "\nTotaal: %3d punten%n",
+                naamSpeler, score[0], score[1], score[2]);
     }
 
     public void printWinnaar(String naamSpeler) {
-        System.out.println(String.format("*** *** *** * Speler %s is de winnaar! * *** *** ***", naamSpeler));
+        System.out.printf("*** *** *** * Speler %s is de winnaar! * *** *** ***%n", naamSpeler);
     }
 }

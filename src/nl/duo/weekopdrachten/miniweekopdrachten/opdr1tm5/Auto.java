@@ -1,4 +1,4 @@
-package nl.duo.weekopdrachten.week01.miniweekopdrachten.opdr1tm5;
+package nl.duo.weekopdrachten.miniweekopdrachten.opdr1tm5;
 
 public class Auto {
     private boolean[] onderdelenKapot = new boolean[4];

@@ -19,6 +19,7 @@ public class Fairground {
 
         int turns = 0;
         while (turns < 3) {
+            System.out.println("*** WHOOP WHOOP starting round " + (turns + 1) + "! ***");
             for (Attraction ride : attractions) {
                 boolean enter = Math.random() > 0.5;
                 System.out.printf("The fee for %s is %.2f, do you want to enter? - %s%n",
@@ -28,6 +29,7 @@ public class Fairground {
                 }
             }
             turns++;
+            System.out.println();
         }
 
         double total = 0;

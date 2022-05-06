@@ -1,4 +1,4 @@
-package nl.duo.weekopdrachten.week01.miniweekopdrachten.opdr7;
+package nl.duo.weekopdrachten.miniweekopdrachten.opdr7;
 
 import java.util.Scanner;
 
@@ -10,12 +10,12 @@ public class Lingo {
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_GREEN = "\u001B[32m";
 
-    private final String[] woorden = {"fiets", "varen", "etuis", "gelul"};
-    private String oplossing;
-    private char[] voortgang;
+    private final String oplossing;
+    private final char[] voortgang;
     private int aantalPogingen;
 
     public Lingo() {
+        String[] woorden = {"fiets", "varen", "etuis", "gelul"};
         oplossing = woorden[(int) (Math.random() * woorden.length)];
         voortgang = new char[oplossing.length()];
     }
@@ -74,7 +74,7 @@ public class Lingo {
             if (letter == oplossing.charAt(i)) { // goede letter op goede plek
                 voortgang[i] = letter;
                 System.out.print(ANSI_PURPLE_BG + ANSI_BLACK + letter + ANSI_RESET);
-            } else if (oplossing.indexOf((int) letter) != -1) {
+            } else if (oplossing.indexOf(letter) != -1) {
                 System.out.print(ANSI_YELLOW_BG + ANSI_BLACK + letter + ANSI_RESET);
             } else {
                 System.out.print(letter);

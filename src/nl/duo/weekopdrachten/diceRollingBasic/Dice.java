@@ -1,4 +1,4 @@
-package nl.duo.weekopdrachten.week01.diceRollingBasic;
+package nl.duo.weekopdrachten.diceRollingBasic;
 
 public class Dice {
 

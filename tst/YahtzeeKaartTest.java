@@ -1,4 +1,4 @@
-import nl.duo.weekopdrachten.week01.diceRollingEnhanced.YahtzeeKaart;
+import nl.duo.weekopdrachten.diceRollingEnhanced.YahtzeeKaart;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
