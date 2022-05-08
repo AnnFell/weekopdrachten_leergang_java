@@ -39,9 +39,9 @@ public class Lingo {
         String woord = scanner.nextLine();
 
         // recursieve aanroep (in de oorspronkelijke code. Heb je al geprobeerd met het woord 'vier' :-)
-        int validate;
-        if ((validate = isInputValide(woord)) != 0) {
-            if (validate < 0) {
+        int validateResult;
+        if ((validateResult = validate(woord)) != 0) {
+            if (validateResult < 0) {
                 System.err.println("Je woord is te kort. Probeer opnieuw.");
             } else {
                 System.err.println("Je woord is te lang. Probeer opnieuw.");
@@ -90,7 +90,7 @@ public class Lingo {
         System.out.println();
     }
 
-    private int isInputValide(String woord) {
+    private int validate(String woord) {
         return woord == null ? -1 : woord.length() - oplossing.length();
     }
 }
