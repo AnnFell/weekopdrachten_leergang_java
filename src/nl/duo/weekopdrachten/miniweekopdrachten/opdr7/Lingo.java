@@ -38,7 +38,14 @@ public class Lingo {
         System.out.println(ANSI_GREEN_BG + ANSI_BLACK + "Typ je woord in:" + ANSI_RESET);
         String woord = scanner.nextLine();
 
-        if (!isInputValide(woord)) {
+        // recursieve aanroep (in de oorspronkelijke code. Heb je al geprobeerd met het woord 'vier' :-)
+        int validate;
+        if ((validate = isInputValide(woord)) != 0) {
+            if (validate < 0) {
+                System.err.println("Je woord is te kort. Probeer opnieuw.");
+            } else {
+                System.err.println("Je woord is te lang. Probeer opnieuw.");
+            }
             beurt(scanner);
         }
 
@@ -83,14 +90,7 @@ public class Lingo {
         System.out.println();
     }
 
-    private boolean isInputValide(String woord) {
-        if (woord.length() < oplossing.length()) {
-            System.out.println("Je woord is te kort. Probeer opnieuw.");
-            return false;
-        } else if (woord.length() > oplossing.length()) {
-            System.out.println("Je woord is te lang. Probeer opnieuw.");
-            return false;
-        }
-        return true;
+    private int isInputValide(String woord) {
+        return woord == null ? -1 : woord.length() - oplossing.length();
     }
 }
