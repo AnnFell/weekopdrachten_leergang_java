@@ -26,8 +26,7 @@ public class Lingo {
         System.out.println("Als een letter paars is, staat de goede letter op de goede plek.");
         System.out.println("Als een letter geel is, is het een goede letter, maar op de verkeerde plek.");
         System.out.println("Geen gekleurde achtergrond? Dan zit de letter niet in het te raden woord.");
-        System.out.println("Hieronder zie je het lengte van het te raden woord: ");
-        printVoortgang();
+        System.out.println("De lengte van het te raden woord is " + oplossing.length() + ".");
         System.out.println();
 
         Scanner scanner = new Scanner(System.in);
@@ -38,8 +37,16 @@ public class Lingo {
         System.out.println(ANSI_GREEN_BG + ANSI_BLACK + "Typ je woord in:" + ANSI_RESET);
         String woord = scanner.nextLine();
 
-        if (!isInputValide(woord)) {
+        int validateResult;
+        if ((validateResult = validate(woord)) != 0) {
+            if (validateResult < 0) {
+                System.err.println("Je woord is te kort: er zijn " + oplossing.length() + " letters nodig. Probeer opnieuw.");
+            } else {
+                System.err.println("Je woord is te lang: er zijn " + oplossing.length() + " letters nodig. Probeer opnieuw.");
+            }
+            // herstart beurt als invoer niet valide is
             beurt(scanner);
+            return;
         }
 
         evalueerScore(woord);
@@ -47,9 +54,10 @@ public class Lingo {
 
         String score = String.copyValueOf(voortgang);
         if (score.equals(oplossing)) { // geraden!
-            System.out.println(ANSI_PURPLE_BG + ANSI_BLACK + " ****** Het woord was inderdaad " + oplossing + "!");
-            System.out.println(" Geraden in " + aantalPogingen + " keer, gefeliciteerd! ****** " + ANSI_RESET);
-        } else { // nieuwe poging:
+            System.out.println(ANSI_PURPLE_BG + ANSI_BLACK + " ****** Het woord was inderdaad " + oplossing + "!" + ANSI_RESET);
+            System.out.println(ANSI_PURPLE_BG + ANSI_BLACK + " Geraden in " + aantalPogingen + " keer, gefeliciteerd! ****** " + ANSI_RESET);
+        } else {
+            // nieuwe poging, recursieve aanroep:
             printVoortgang();
             beurt(scanner);
         }
@@ -83,14 +91,7 @@ public class Lingo {
         System.out.println();
     }
 
-    private boolean isInputValide(String woord) {
-        if (woord.length() < oplossing.length()) {
-            System.out.println("Je woord is te kort. Probeer opnieuw.");
-            return false;
-        } else if (woord.length() > oplossing.length()) {
-            System.out.println("Je woord is te lang. Probeer opnieuw.");
-            return false;
-        }
-        return true;
+    private int validate(String woord) {
+        return woord == null ? -1 : woord.length() - oplossing.length();
     }
 }
