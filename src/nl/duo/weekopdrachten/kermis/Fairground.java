@@ -17,14 +17,14 @@ public class Fairground {
         attractions.add(new Attraction("Claw Grabber", 5, 1));
         attractions.add(new Attraction("The Octopus", 2.6, 4));
 
-        int turns = 0;
-        while (turns < 3) {
-            System.out.println("*** WHOOP WHOOP starting round " + (turns + 1) + "! ***");
+        int turns = 1;
+        while (turns <= 3) {
+            System.out.println("*** WHOOP WHOOP starting round " + (turns) + "! ***");
             for (Attraction ride : attractions) {
-                boolean enter = Math.random() > 0.5;
+                boolean wantToEnter = Math.random() > 0.5;
                 System.out.printf("The fee for %s is %.2f, do you want to enter? - %s%n",
-                        ride.getName(), ride.getPrice(), enter ? "Yes" : "No");
-                if (enter) {
+                        ride.getName(), ride.getPrice(), wantToEnter ? "Yes" : "No");
+                if (wantToEnter) {
                     ride.perform();
                 }
             }
@@ -32,14 +32,14 @@ public class Fairground {
             System.out.println();
         }
 
-        double total = 0;
+        double totalRevenue = 0;
         for (Attraction ride : attractions) {
             printTicketLine(ride.getName(), ride.getRevenue());
-            total += ride.getRevenue();
+            totalRevenue += ride.getRevenue();
         }
         System.out.println("-------------------------");
-        printTicketLine("Total revenue", total);
-        printTicketLine("Taxes 21%", total * 0.21);
+        printTicketLine("Total revenue", totalRevenue);
+        printTicketLine("Taxes 21%", totalRevenue * 0.21);
     }
 
     private static void printTicketLine(String description, double amount) {

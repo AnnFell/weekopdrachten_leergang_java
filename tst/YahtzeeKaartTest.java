@@ -1,10 +1,10 @@
 import nl.duo.weekopdrachten.diceRollingEnhanced.YahtzeeKaart;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Arrays;
 
 public class YahtzeeKaartTest {
     private YahtzeeKaart yahtzeeKaart;
@@ -16,8 +16,8 @@ public class YahtzeeKaartTest {
 
     @Test
     public void test() {
-        ArrayList<String> testResultaat = yahtzeeKaart.optiesVoorInvullen(new int[]{1, 1, 1, 1, 1});
-        System.out.println(testResultaat);
-        assertEquals("[Eenen, Chance, Yahtzee!]", testResultaat);
+        ArrayList<String> referentieWaarde = new ArrayList<>(Arrays.asList("Eenen", "Chance", "Yahtzee!"));
+        ArrayList<String> testWaarde = yahtzeeKaart.optiesVoorInvullen(new int[]{1, 1, 1, 1, 1});
+        Assertions.assertEquals(referentieWaarde, testWaarde);
     }
 }
