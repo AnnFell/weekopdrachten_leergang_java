@@ -82,7 +82,7 @@ public class Lingo {
             if (letter == oplossing.charAt(i)) { // goede letter op goede plek
                 voortgang[i] = letter;
                 System.out.print(ANSI_PURPLE_BG + ANSI_BLACK + letter + ANSI_RESET);
-            } else if (oplossing.indexOf(letter) != -1) {
+            } else if (oplossing.indexOf(letter) != -1) { // goede letter op de verkeerde plek
                 System.out.print(ANSI_YELLOW_BG + ANSI_BLACK + letter + ANSI_RESET);
             } else {
                 System.out.print(letter);
