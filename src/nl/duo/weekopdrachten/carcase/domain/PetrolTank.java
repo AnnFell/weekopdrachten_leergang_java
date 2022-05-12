@@ -30,4 +30,12 @@ public class PetrolTank {
         return currentLevel;
     }
 
+    public void fill() throws TankOverfillException {
+        if (this.getCurrentLevel() < this.getMaxLevel()) {
+            this.increase(1);
+        } else {
+            throw new TankOverfillException();
+        }
+    }
+
 }

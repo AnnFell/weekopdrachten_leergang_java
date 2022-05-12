@@ -23,7 +23,7 @@ public class CarApp {
         starlet.drive(3);
         printCarStatus(starlet);
         starlet.drive();
-        starlet.fill();
+        starlet.fill(1);
         printCarStatus(starlet);
 
         // Exercise 8b

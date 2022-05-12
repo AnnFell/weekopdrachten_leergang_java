@@ -10,14 +10,11 @@ public class Car extends Vehicle {
     private LocalDate registrationDate;
 
     public Car(String licencePlate) {
-        super();
-        this.licencePlate = licencePlate.toUpperCase();
-        this.price = -1;
-        registrationDate = LocalDate.now();
+        this(licencePlate, -1);
     }
 
     public Car(String licencePlate, double price) {
-        super();
+        // hier wordt impliciet de super() aangeroepen
         this.licencePlate = licencePlate.toUpperCase();
         this.price = price;
         registrationDate = LocalDate.now();
@@ -80,22 +77,9 @@ public class Car extends Vehicle {
     }
 
     @Override
-    public void fill() {
-        super.fill();
-    }
-
-    @Override
-    public void fill(int liters) {
-        super.fill(liters);
-    }
-
-    @Override
     public void drive() {
+        // invokes the drive from the superclass (which is Car::drive() in this case)
         super.drive();
-    }
-
-    @Override
-    public void drive(int kms) {
-        super.drive(kms);
+//        System.out.println("Driving Car");
     }
 }

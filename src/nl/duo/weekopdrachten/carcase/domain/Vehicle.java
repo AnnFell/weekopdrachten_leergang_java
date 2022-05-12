@@ -14,16 +14,15 @@ public abstract class Vehicle {
         petrolTank = new PetrolTank(maxLevelPetrol, minLevelPetrol);
     }
 
-    public void fill() {
-        if (petrolTank.getCurrentLevel() < petrolTank.getMaxLevel()) {
-            petrolTank.increase(1);
-        }
-    }
 
-    public void fill(int liters) {
+    public void fill(int liters){
         while (liters > 0) {
-            fill();
-            liters--;
+            try {
+                petrolTank.fill();
+                liters--;
+            } catch (TankOverfillException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 
